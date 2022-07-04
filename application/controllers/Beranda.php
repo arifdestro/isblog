@@ -312,7 +312,7 @@ class Beranda extends CI_Controller
                 ")->row_array();
 
                 if ($re['nama'] == $check['nama_user']) {
-                    $tanda = '<span class="badge bg-danger">Penulis</span>';
+                    $tanda = '<span class="badge bg-danger">Pembuat</span>';
                 } else {
                     $tanda = '';
                 }
