@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -49,6 +49,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
-$route['404_override'] = '';
+$route['default_controller'] = 'index';
+$route['404_override'] = 'beranda/notfound';
 $route['translate_uri_dashes'] = FALSE;
+
+// Landing
+$route['notfound']                = 'beranda/notfound';
+$route['search']                  = 'beranda/search/';
+$route['legal/(:any)']            = 'beranda/legal/$1';
+$route['post/detail/(:any)']      = 'beranda/detail/$1';
+$route['tag/(:any)']              = 'beranda/tag/$1';
+$route['tag']                     = 'beranda/tag_all';
+$route['kategori/(:any)']         = 'beranda/kategori/$1';
+$route['kategori']                = 'beranda/kategori_all';
+$route['beranda/page/(:any)']     = 'beranda/index/$1';
+$route['showpost']                = 'beranda/post_by_id';
+$route['kirim_komentar']          = 'beranda/add_comment';
+$route['kirim_pesan']             = 'beranda/pesan';
+$route['forgot']                  = 'auth/forgot';
+$route['reset']                   = 'auth/reset';
+$route['send']                    = 'auth/send';
+$route['active']                  = 'auth/active';
+$route['block']                   = 'auth/block';
+
+// Admin
+$route['admin/comment']           = 'admin/comment/show/publik';
+$route['admin/comment/update']    = 'admin/comment/edit';
+$route['admin/comment/(:any)']    = 'admin/comment/show/$1';
+$route['admin/post/get-edit/(:any)']  = 'admin/post/get_edit/$1';
+$route['admin/database']          = 'admin/website';
