@@ -99,7 +99,7 @@ class M_user extends CI_Model
         $this->db->from('post');
         // $this->db->join('user', 'post.id_user=user.id_user', 'left');
         $this->db->join('kategori', 'post.id_kategori=kategori.id_kategori', 'left');
-        $this->db->where('status_post', 1);
+        $this->db->where('status_post', '1');
         $this->db->order_by('id_post', 'DESC');
         $this->db->limit($limit, $offset);
         $query = $this->db->get();
@@ -108,7 +108,7 @@ class M_user extends CI_Model
 
     public function get_post()
     {
-        return $this->db->query("SELECT * FROM post, kategori WHERE post.id_kategori = kategori.id_kategori");
+        return $this->db->query("SELECT * FROM post, kategori WHERE post.id_kategori = kategori.id_kategori AND status_post = '1'");
     }
 
     public function search($query)
