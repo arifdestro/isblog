@@ -72,13 +72,14 @@ class M_user extends CI_Model
         return (bool) ($this->db->affected_rows() > 0);
     }
 
-    public function list()
+    public function list($id_post)
     {
         $this->db->select('*');
         $this->db->from('post');
         $this->db->join('kategori', 'kategori.id_kategori = post.id_kategori');
         $this->db->limit(3);
         $this->db->where('post.status_post', 1);
+        $this->db->where_not_in('post.id_post', $id_post);
         $this->db->order_by('id_post', 'DESC');
 
         return $this->db->get()->result();
@@ -216,36 +217,6 @@ class M_user extends CI_Model
         }
 
         return [];
-    }
-
-    public function add_new_comment()
-    {
-        $id_post = $this->input->post('id_post');
-        $parent = $this->input->post('parent_id') ?? 0;
-        $nama = $this->input->post('comment_name');
-        $email = $this->input->post('comment_email');
-        $pesan = $this->input->post('comment_body');
-        return $this->input->post('komentar_parent');
-
-        $this->db->trans_start();
-        //INSERT TO Komentar
-        $data  = array(
-            'nama' => $nama,
-            'email' => $email,
-            'pesan' => $pesan,
-            'komentar_parent' => $parent
-        );
-        $this->db->insert('komentar', $data);
-        //GET ID Komentar
-        $comment_id = $this->db->insert_id();
-        $result = array();
-        $result[] = array(
-            'id_post'   => $id_post,
-            'id_komentar'   => $comment_id
-        );
-        //MULTIPLE INSERT TO Detail_Komentar
-        $this->db->insert_batch('detail_komentar', $result);
-        $this->db->trans_complete();
     }
 
     public function counter(?int $status = null)

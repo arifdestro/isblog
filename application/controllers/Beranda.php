@@ -154,13 +154,13 @@ class Beranda extends CI_Controller
         if ($post->num_rows() > 0) {
             $q = $post->row();
 
+            $kode          = $q->id_post;
             $data['judul']    = $q->judul_post;
-            $data['list']     = $this->m_user->list();
+            $data['list']     = $this->m_user->list($kode);
             $data['get']    = $this->db->get('pengaturan')->row_array();
             $data['post']     = $q;
             $data['komentar'] = $this->show_tree($q->id_post);
 
-            $kode          = $q->id_post;
             $data['komen'] = $this->db->query("SELECT * FROM komentar, post, detail_komentar WHERE komentar.id_komentar = detail_komentar.id_komentar AND post.id_post = detail_komentar.id_post AND detail_komentar.id_post={$kode} AND komentar.status=1")->num_rows();
             $this->m_user->count_views($kode);
 
