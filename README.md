@@ -16,11 +16,11 @@ Fitur :
   2. Datatable
   3. Chart Pengunjung
   4. Komentar dan Kelola Komentar
-	5. WYSIWYG Summernote support delete dan insert image
-	6. Kelola Database, Download DB & Restore DB (Beta)
-	7. Recaptcha
-	8. Aktivasi Akun dan Lupa Password
-	9. Manajemen data user (Khusus akses Admin)
+  5. WYSIWYG Summernote support delete dan insert image
+  6. Kelola Database, Download DB & Restore DB (Beta)
+  7. Recaptcha
+  8. Aktivasi Akun dan Lupa Password
+  9. Manajemen data user (Khusus akses Admin)
  10. Pengaturan
 
 ## Cara Penggunaan
