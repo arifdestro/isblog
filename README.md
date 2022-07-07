@@ -1,11 +1,27 @@
 # isblog (Web Blog 3 Hak Akses)
 Blog Menggunakan CI_3 Base
 
+Akses Admin : 
+  1. Username : Admin
+  2. Password : admin1234
+
+Akses Penulis : 
+  1. Username : Arif
+  2. Password : user1234
+	
+Username dapat diganti sesuai keinginan
+
 Fitur : 
   1. CRUD Blog (Kategori, Tag)
   2. Datatable
-  3. Chart
-  4. Komentar
+  3. Chart Pengunjung
+  4. Komentar dan Kelola Komentar
+	5. WYSIWYG Summernote support delete dan insert image
+	6. Kelola Database, Download DB & Restore DB (Beta)
+	7. Recaptcha
+	8. Aktivasi Akun dan Lupa Password
+	9. Manajemen data user (Khusus akses Admin)
+ 10. Pengaturan
 
 ## Cara Penggunaan
 1. Jalankan XAMPP anda atau yang lain
