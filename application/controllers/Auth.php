@@ -50,8 +50,9 @@ class Auth extends CI_Controller
             'alert2' => 'warning',
             'alert3' => 'danger',
             'alert4' => 'dark',
-            'text1' => 'Validasi Captcha belum dimasukkan',
-            'text2' => 'Email atau Password yang anda masukkan kurang tepat',
+            'text0' => 'Validasi Captcha belum dimasukkan',
+            'text1' => 'Validasi Captcha gagal',
+            'text2' => 'Email atau Sandi yang anda masukkan kurang tepat',
             'text3' => 'Email belum ter-aktivasi, silahkan aktivasi terlebih dahulu',
             'text4' => 'Email belum di registrasi atau belum terdaftar',
             'text5' => 'Anda berhasil masuk sebagai',
@@ -93,54 +94,61 @@ class Auth extends CI_Controller
             // Merubah format penulisan
             $finalResponse = json_decode($receiveData, true);
 
-            if ($user) {
-                if ($user['status'] == 1) {
-                    if (password_verify($password, $user['password'])) {
-                        $data = [
-                            'id_usr' => $user['id_user'],
-                            'email' => $user['email'],
-                            'name' => $user['nama_user'],
-                            'role' => $user['akses'],
-                            'loggedIn' => true
-                        ];
-                        $this->session->set_userdata($data);
+            if ($finalResponse['success']) {
+                if ($user) {
+                    if ($user['status'] == 1) {
+                        if (password_verify($password, $user['password'])) {
+                            $data = [
+                                'id_usr' => $user['id_user'],
+                                'email' => $user['email'],
+                                'name' => $user['nama_user'],
+                                'role' => $user['akses'],
+                                'loggedIn' => true
+                            ];
+                            $this->session->set_userdata($data);
 
-                        $this->session->set_flashdata(
-                            'pesan',
-                            '<div id="pesan" class="alert alert-' . $request['alert1'] . '" role="alert">
+                            $this->session->set_flashdata(
+                                'pesan',
+                                '<div id="pesan" class="alert alert-' . $request['alert1'] . '" role="alert">
                         <strong><i class="fas fa-info-circle"></i> Info!</strong> ' . $request['text5'] . ' ' . $user['akses'] . '.
                         </div>'
-                        );
-                        redirect('admin/home');
-                    } else {
-                        $this->session->set_flashdata('pesan', '<div id="pesan" class="alert alert-' . $request['alert2'] . '" role="alert">
+                            );
+                            redirect('admin/home');
+                        } else {
+                            $this->session->set_flashdata('pesan', '<div id="pesan" class="alert alert-' . $request['alert2'] . '" role="alert">
                     <strong><i class="fas fa-info-circle"></i> Info!</strong> ' . $request['text2'] . '.
                     </div>');
-                        redirect('auth');
-                    }
-                } else if ($user['status'] == 2) {
-                    $this->session->set_flashdata('pesan', '<div id="pesan" class="alert alert-' . $request['alert4'] . '" role="alert">
+                            redirect('auth');
+                        }
+                    } else if ($user['status'] == 2) {
+                        $this->session->set_flashdata('pesan', '<div id="pesan" class="alert alert-' . $request['alert4'] . '" role="alert">
                 <strong><i class="fas fa-info-circle"></i> Info!</strong> ' . $request['text6'] . '.
                 </div>');
-                    redirect('auth');
-                } else {
-                    $this->session->set_flashdata('pesan', '<div id="pesan" class="alert alert-' . $request['alert2'] . '" role="alert">
+                        redirect('auth');
+                    } else {
+                        $this->session->set_flashdata('pesan', '<div id="pesan" class="alert alert-' . $request['alert2'] . '" role="alert">
                 <strong><i class="fas fa-info-circle"></i> Info!</strong> ' . $request['text3'] . '.
                 </div>');
-                    $data['judul'] = 'Aktifkan Akun | KD-ADMIN';
-                    $this->load->view("template/header", $data);
-                    $this->load->view("auth/send", $data);
-                    $this->load->view("template/footer");
-                }
-            } else {
-                $this->session->set_flashdata('pesan', '<div id="pesan" class="alert alert-' . $request['alert3'] . '" role="alert">
+                        $data['judul'] = 'Aktifkan Akun | KD-ADMIN';
+                        $this->load->view("template/header", $data);
+                        $this->load->view("auth/send", $data);
+                        $this->load->view("template/footer");
+                    }
+                } else {
+                    $this->session->set_flashdata('pesan', '<div id="pesan" class="alert alert-' . $request['alert3'] . '" role="alert">
             <strong><i class="fas fa-info-circle"></i> Info!</strong> ' . $request['text4'] . '.
             </div>');
+                    redirect('auth');
+                }
+            } else {
+                $this->session->set_flashdata('pesan', '<div id="pesan" class="alert alert-' . $request['alert2'] . '" role="alert">
+                <strong><i class="fas fa-info-circle"></i> Info!</strong> ' . $request['text1'] . '.
+                    </div>');
                 redirect('auth');
             }
         } else {
             $this->session->set_flashdata('pesan', '<div id="pesan" class="alert alert-' . $request['alert2'] . '" role="alert">
-            <strong><i class="fas fa-info-circle"></i> Info!</strong> ' . $request['text1'] . '.
+            <strong><i class="fas fa-info-circle"></i> Info!</strong> ' . $request['text0'] . '.
                 </div>');
             redirect('auth');
         }
