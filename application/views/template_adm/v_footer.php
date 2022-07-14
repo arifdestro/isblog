@@ -221,11 +221,11 @@
             ],
             height: "300px",
             callbacks: {
-                onImageUpload2: function(image) {
-                    uploadImage(image[0]);
+                onImageUpload: function(image) {
+                    uploadImage2(image[0]);
                 },
-                onMediaDelete2: function(target) {
-                    deleteImage(target[0].src);
+                onMediaDelete: function(target) {
+                    deleteImage2(target[0].src);
                 }
             }
         });
@@ -245,11 +245,11 @@
             ],
             height: "300px",
             callbacks: {
-                onImageUpload3: function(image) {
-                    uploadImage(image[0]);
+                onImageUpload: function(image) {
+                    uploadImage3(image[0]);
                 },
-                onMediaDelete3: function(target) {
-                    deleteImage(target[0].src);
+                onMediaDelete: function(target) {
+                    deleteImage3(target[0].src);
                 }
             }
         });
